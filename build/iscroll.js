@@ -478,6 +478,17 @@ IScroll.prototype = {
 			return;
 		}
 
+        var elem = e.target;
+        while (elem !== null) {
+            if (elem.hasAttribute('data-iscroll-ignore')) {
+                return;
+            } else if (elem === this.wrapper) {
+                break;
+            }
+
+            elem = elem.parentElement;
+        }
+
 		if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
 			e.preventDefault();
 		}
